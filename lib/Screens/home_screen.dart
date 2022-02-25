@@ -221,7 +221,7 @@ class _HomePageState extends State<HomePage> with SingleTickerProviderStateMixin
                       setState(() {
                         statusText ="Online";
                         isDriverOnline = true;
-                        statusColor = Colors.orange.shade300;
+                        statusColor = Colors.orange.shade200;
                       });
                       //display Toast
                       Fluttertoast.showToast(msg: "You are online now");
