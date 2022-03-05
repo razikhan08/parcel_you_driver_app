@@ -5,8 +5,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:parcel_you_driver_app/Screens/welcome_screen.dart';
-
-
 import '../global/global.dart';
 import '../widgets/progress_dialog.dart';
 import 'home_screen.dart';

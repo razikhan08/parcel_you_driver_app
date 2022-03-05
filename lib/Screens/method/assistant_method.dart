@@ -87,9 +87,9 @@ class AssistantMethods {
     // booking fee = $2.10,
 
     double baseFare = 2.50;
-    double distanceFare = (details.distance_value!/1000) * 0.15;
-    double durationFare = (details.duration_value!/60) * 0.5;
-    double bookingFee = 2.10;
+    double distanceFare = (details.distance_value!/1000) * 0.30;
+    double durationFare = (details.duration_value!/60) * 0.18;
+    double bookingFee = 2.50;
 
     double totalFare = baseFare + distanceFare + durationFare + bookingFee;
 

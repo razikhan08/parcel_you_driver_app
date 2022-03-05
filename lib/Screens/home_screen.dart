@@ -1,6 +1,7 @@
 import 'dart:async';
 
 import 'package:firebase_database/firebase_database.dart';
+import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -9,6 +10,7 @@ import 'package:fluttertoast/fluttertoast.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:parcel_you_driver_app/Screens/welcome_screen.dart';
+import 'package:parcel_you_driver_app/helpers/push_notification_service.dart';
 
 import '../global/global.dart';
 import '../widgets/drawer.dart';
@@ -84,7 +86,7 @@ class _HomePageState extends State<HomePage> with SingleTickerProviderStateMixin
   LocationPermission? _locationPermission;
 
   String statusText = "Offline";
-  Color statusColor = Colors.grey.shade300;
+  Color statusColor = Colors.deepPurpleAccent;
   bool isDriverOnline = false;
 
 
@@ -112,12 +114,17 @@ class _HomePageState extends State<HomePage> with SingleTickerProviderStateMixin
     userName = userModelCurrentInfo!.name!;
   }
 
+    getCurrentDriverInfo() async{
+    currentFirebaseUser = fbAuth.currentUser!;
+    PushNotificationSystem pushNotificationSystem  = PushNotificationSystem();
+    pushNotificationSystem.initializeCloudMessaging();
+  }
   @override
   void initState() {
     super.initState();
 
     checkIfLocationPermissionAllowed();
-
+    getCurrentDriverInfo();
   }
 
   @override
@@ -157,7 +164,7 @@ class _HomePageState extends State<HomePage> with SingleTickerProviderStateMixin
             ),
           ),
 
-          //ui for online an offline driver//
+          //ui for online and offline driver//
           statusText != "Online"
               ?  Positioned(
             left: 0,
@@ -170,10 +177,10 @@ class _HomePageState extends State<HomePage> with SingleTickerProviderStateMixin
                   child: Container(
                     decoration:  BoxDecoration(
                       border: Border.all(
-                        color: Colors.white
+                        color: Colors.transparent
                       ),
                       boxShadow: const [BoxShadow(
-                        color: Colors.white,
+                        color: Colors.transparent,
                       )]
                     ),
                     height: offlineContainer,
@@ -192,17 +199,7 @@ class _HomePageState extends State<HomePage> with SingleTickerProviderStateMixin
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.center,
               children:<Widget> [
-                Container(
-                  child: statusText != "Online"
-                      ? const Text("Go online to start driving",
-                    style: TextStyle(
-                      fontSize: 18,fontWeight: FontWeight.bold
-                    ),
-
-                  )
-                      : null
-                ),
-                const SizedBox(height: 20),
+                const SizedBox(height: 30),
 
                 ElevatedButton(
                   style: ElevatedButton.styleFrom(
@@ -221,7 +218,7 @@ class _HomePageState extends State<HomePage> with SingleTickerProviderStateMixin
                       setState(() {
                         statusText ="Online";
                         isDriverOnline = true;
-                        statusColor = Colors.orange.shade200;
+                        statusColor = Colors.deepPurpleAccent;
                       });
                       //display Toast
                       Fluttertoast.showToast(msg: "You are online now");
@@ -233,7 +230,7 @@ class _HomePageState extends State<HomePage> with SingleTickerProviderStateMixin
                       setState(() {
                         statusText ="Offline";
                         isDriverOnline = false;
-                        statusColor = Colors.grey.shade300;
+                        statusColor = Colors.deepPurpleAccent;
                       });
                       Fluttertoast.showToast(msg: "You are offline now");
                     }
@@ -243,7 +240,7 @@ class _HomePageState extends State<HomePage> with SingleTickerProviderStateMixin
                     style: const TextStyle(
                         fontSize: 20,
                         fontWeight: FontWeight.bold,
-                        color: Colors.black
+                        color: Colors.white
                     ),
                   )
                       :  const Icon(Icons.phonelink_ring,
@@ -252,7 +249,6 @@ class _HomePageState extends State<HomePage> with SingleTickerProviderStateMixin
 
                   ),
                 ),
-                ElevatedButton(onPressed: (){availableDrivers();}, child: Text('press')),
 
 
               ],

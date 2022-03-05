@@ -43,7 +43,7 @@ class _MySplashScreenState extends State<MySplashScreen> {
     return Material(
       type: MaterialType.transparency,
       child: Container(
-        color: Colors.green.shade200,
+        color: Colors.deepPurpleAccent,
         child: const Center(child: Text('ParcelYou',
           style: TextStyle(
               color: Colors.white,
