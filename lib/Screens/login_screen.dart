@@ -3,6 +3,7 @@ import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:parcel_you_driver_app/Screens/signup_screen.dart';
+import 'package:parcel_you_driver_app/widgets/screen_overlay.dart';
 
 import '../global/global.dart';
 import '../splashscreen/splash_screen.dart';
@@ -67,7 +68,7 @@ class _LoginScreenState extends State<LoginScreen> with SingleTickerProviderStat
 
           currentFirebaseUser = firebaseUser;
           Fluttertoast.showToast(msg: "Please wait while we setup your experience");
-          Navigator.push(context, MaterialPageRoute(builder: (c) =>  MySplashScreen()));
+          Navigator.push(context, MaterialPageRoute(builder: (c) =>  LoadingScreen()));
         } else {
 
           Fluttertoast.showToast(msg: "User does not exist");
@@ -114,18 +115,18 @@ class _LoginScreenState extends State<LoginScreen> with SingleTickerProviderStat
       appBar: AppBar(
 
         iconTheme: const IconThemeData(
-          color: Colors.black,
+          color: Colors.white,
         ),
-        backgroundColor: Colors.white,
+        backgroundColor: Colors.deepPurpleAccent.shade200,
         elevation: 1,
         bottom:  TabBar(
-          indicatorColor: Colors.green.shade200,
+          indicatorColor: Colors.white,
           controller: tabController,
           tabs: const [
             Tab(
               child: Text("Sign In",
               style: TextStyle(
-                color: Colors.black,
+                color: Colors.white,
                 fontSize:18,
                 fontWeight: FontWeight.bold,
               ),
@@ -134,7 +135,7 @@ class _LoginScreenState extends State<LoginScreen> with SingleTickerProviderStat
             Tab(
               child: Text("New User",
                 style: TextStyle(
-                  color: Colors.black,
+                  color: Colors.white,
                   fontSize:18,
                   fontWeight: FontWeight.bold,
                 ),
@@ -225,24 +226,27 @@ class _LoginScreenState extends State<LoginScreen> with SingleTickerProviderStat
                   ),
                 ),
                 SizedBox(height: 20),
-                ElevatedButton (
-                  onPressed: () {
-                     validateForm();
+                Container(
+                  width: 350,
+                  height: 50,
+                  child: ElevatedButton (
+                    onPressed: () {
+                       validateForm();
 
-                  },
-                  child: const Text('Continue',
-                    style: TextStyle(
-                      color: Colors.white,
-                      fontSize: 20.0,
-                      fontWeight: FontWeight.bold,
+                    },
+                    child: const Text('Continue',
+                      style: TextStyle(
+                        color: Colors.white,
+                        fontSize: 20.0,
+                        fontWeight: FontWeight.bold,
+                      ),
                     ),
-                  ),
-                  style: ElevatedButton.styleFrom(
-                    padding: EdgeInsets.symmetric(horizontal: 130,vertical: 15),
-                    primary: Colors.black,
-                    shape: const RoundedRectangleBorder(borderRadius: BorderRadius.all(Radius.zero)),
-                    elevation:0,
-                    shadowColor: Colors.black,
+                    style: ElevatedButton.styleFrom(
+                      primary: Colors.deepPurpleAccent,
+                      shape: const RoundedRectangleBorder(borderRadius: BorderRadius.all(Radius.zero)),
+                      elevation:0,
+                      shadowColor: Colors.black,
+                    ),
                   ),
                 ),
               ],

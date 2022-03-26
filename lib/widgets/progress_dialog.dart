@@ -21,8 +21,8 @@ class ProgressDialog extends StatelessWidget {
           child: Row(
             children: <Widget> [
               SizedBox(width: 6),
-              const LinearProgressIndicator(
-                valueColor: AlwaysStoppedAnimation<Color>(Colors.green),
+              const CircularProgressIndicator(
+                valueColor: AlwaysStoppedAnimation<Color>(Colors.deepPurpleAccent),
               ),
 
               SizedBox(width: 26),

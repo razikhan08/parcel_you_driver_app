@@ -52,7 +52,7 @@ class _OTPScreenState extends State<OTPScreen> {
           if(firebase.user != null) {
             saveDriverInfo();
             Navigator.of(context).push(
-                MaterialPageRoute(builder: (c) => ScreenOverlay()));
+                MaterialPageRoute(builder: (c) => LoadingScreen()));
           }
         });
       },
@@ -143,7 +143,7 @@ class _OTPScreenState extends State<OTPScreen> {
                       saveDriverInfo();
 
                       Navigator.of(context).push(MaterialPageRoute(builder: (c) {
-                        return  ScreenOverlay();
+                        return  LoadingScreen();
                       }));
                     }
                   }
@@ -185,7 +185,7 @@ class _OTPScreenState extends State<OTPScreen> {
                 if(firebase.user != null){
 
                   saveDriverInfo();
-                  Navigator.of(context).push(MaterialPageRoute(builder: (c) => ScreenOverlay()));
+                  Navigator.of(context).push(MaterialPageRoute(builder: (c) => LoadingScreen()));
                 }
               });
             }

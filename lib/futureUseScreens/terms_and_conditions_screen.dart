@@ -1,9 +1,10 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
+import 'package:parcel_you_driver_app/futureUseScreens/onbaarding.dart';
 import 'package:parcel_you_driver_app/Screens/welcome_screen.dart';
 
-import 'home_screen.dart';
+import '../Screens/home_screen.dart';
 
 class TermsAndConditions extends StatefulWidget {
 
@@ -60,7 +61,7 @@ class _TermsAndConditionsState extends State<TermsAndConditions> {
 
         DatabaseReference driversInfo =  FirebaseDatabase.instance.ref().child("Driver's Personal Data");
         driversInfo.set(driverMap);
-        Navigator.push(context, MaterialPageRoute(builder: (c) =>  HomePage()));
+        Navigator.push(context, MaterialPageRoute(builder: (c) =>  DriverOnboarding()));
       };
     }
 
@@ -89,7 +90,7 @@ class _TermsAndConditionsState extends State<TermsAndConditions> {
             fontWeight: FontWeight.bold,
           ),
         ),
-        backgroundColor: Colors.green.shade200,
+        backgroundColor: Colors.deepPurpleAccent,
       ),
       body: Column(
         children:<Widget> [
@@ -121,21 +122,30 @@ class _TermsAndConditionsState extends State<TermsAndConditions> {
           Padding(
             padding: const EdgeInsets.all(8.0),
             child: Center(
-              child: ElevatedButton (
-                onPressed: _onPressed,
-                child: const Text('Contnue',
-                  style: TextStyle(
-                    color: Colors.white,
-                    fontSize: 20.0,
-                    fontWeight: FontWeight.bold,
+              child: Container(
+                height: 50,
+                width: 350,
+                child: ElevatedButton (
+                  onPressed: _onPressed,
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: const [
+                      Text('Continue',
+                        style: TextStyle(
+                          color: Colors.white,
+                          fontSize: 20.0,
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
+                      Icon(Icons.arrow_forward)
+                    ],
                   ),
-                ),
-                style: ElevatedButton.styleFrom(
-                  padding: EdgeInsets.symmetric(horizontal: 130,vertical: 15),
-                  primary: Colors.black,
-                  shape: const RoundedRectangleBorder(borderRadius: BorderRadius.all(Radius.zero)),
-                  elevation:0,
-                  shadowColor: Colors.black,
+                  style: ElevatedButton.styleFrom(
+                    primary: Colors.deepPurpleAccent,
+                    shape: const RoundedRectangleBorder(borderRadius: BorderRadius.all(Radius.zero)),
+                    elevation:0,
+                    shadowColor: Colors.deepPurpleAccent,
+                  ),
                 ),
               ),
             ),

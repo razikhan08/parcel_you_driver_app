@@ -4,10 +4,10 @@ import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:fluttertoast/fluttertoast.dart';
+import 'package:parcel_you_driver_app/Screens/home_screen.dart';
 import 'package:parcel_you_driver_app/Screens/welcome_screen.dart';
 import '../global/global.dart';
 import '../widgets/progress_dialog.dart';
-import 'home_screen.dart';
 
 class SignupScreen extends StatefulWidget {
   const SignupScreen({Key? key}) : super(key: key);
@@ -139,7 +139,6 @@ class _SignupScreenState extends State<SignupScreen> {
       currentFirebaseUser = firebaseUser;
       Navigator.push(context, MaterialPageRoute(builder: (c) => HomePage()));
 
-
     }
     else{
       Navigator.pop(context);
@@ -147,8 +146,6 @@ class _SignupScreenState extends State<SignupScreen> {
     }
 
   }
-
-
 
   @override
   Widget build(BuildContext context) {
@@ -370,23 +367,27 @@ class _SignupScreenState extends State<SignupScreen> {
               ),
 
               SizedBox(height: 30,),
-              ElevatedButton (
-                onPressed: () {
-                  validateForm();
-                  },
-                child: const Text('Continue',
-                  style: TextStyle(
-                    color: Colors.white,
-                    fontSize: 20.0,
-                    fontWeight: FontWeight.bold,
+              Container(
+                width: 350,
+                height: 50,
+                child: ElevatedButton (
+                  onPressed: () {
+                    validateForm();
+                    },
+                  child: const Text('Continue',
+                    style: TextStyle(
+                      color: Colors.white,
+                      fontSize: 20.0,
+                      fontWeight: FontWeight.bold,
+                    ),
                   ),
-                ),
-                style: ElevatedButton.styleFrom(
-                  padding: EdgeInsets.symmetric(horizontal: 130,vertical: 15),
-                  primary: Colors.black,
-                  shape: const RoundedRectangleBorder(borderRadius: BorderRadius.all(Radius.zero)),
-                  elevation:0,
-                  shadowColor: Colors.black,
+                  style: ElevatedButton.styleFrom(
+                    padding: EdgeInsets.symmetric(horizontal: 130,vertical: 15),
+                    primary: Colors.black,
+                    shape: const RoundedRectangleBorder(borderRadius: BorderRadius.all(Radius.zero)),
+                    elevation:0,
+                    shadowColor: Colors.black,
+                  ),
                 ),
               ),
             ],

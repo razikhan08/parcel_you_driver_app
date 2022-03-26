@@ -41,7 +41,7 @@ class AssistantMethods {
     currentFirebaseUser = fbAuth.currentUser;
 
     DatabaseReference userRef = FirebaseDatabase.instance.ref().
-    child("User's Information").
+    child("Driver's Information").
     child(currentFirebaseUser!.uid);
 
     userRef.once().then((snap){

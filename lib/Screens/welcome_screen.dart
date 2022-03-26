@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
-
-import 'login_screen.dart';
-
+import 'package:parcel_you_driver_app/futureUseScreens/get_started_screen.dart';
 
 
 class WelcomePage extends StatefulWidget {
@@ -18,14 +16,14 @@ class _WelcomePageState extends State<WelcomePage> {
       color: Colors.white,
       debugShowCheckedModeBanner: false,
       home: Scaffold(
-        backgroundColor: Colors.white,
+        backgroundColor: Colors.deepPurpleAccent,
         body: Column(
           children: <Widget>[
             SizedBox(height: 300,),
              const Text('ParcelYou Driver',
               style: TextStyle(
                 fontSize: 24,
-                color: Colors.deepPurpleAccent,
+                color: Colors.white,
                 fontWeight: FontWeight.bold,
               ),
             ),
@@ -35,22 +33,25 @@ class _WelcomePageState extends State<WelcomePage> {
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 11, vertical: 11),
               child: Center(
-                child: ElevatedButton(onPressed: () => {
-                  Navigator.push(context, MaterialPageRoute(builder: (context) =>  LoginScreen()))
-                },
-                  child: const Text('Get Started',
-                    style: TextStyle(
-                      color: Colors.white,
-                      fontSize: 18.0,
-                      fontWeight: FontWeight.bold,
+                child: Container(
+                  height: 50,
+                  width: 350,
+                  child: ElevatedButton(onPressed: () => {
+                    Navigator.push(context, MaterialPageRoute(builder: (context) =>  GetStartedPage()))
+                  },
+                    child: const Text('Get Started',
+                      style: TextStyle(
+                        color: Colors.white,
+                        fontSize: 18.0,
+                        fontWeight: FontWeight.bold,
+                      ),
                     ),
-                  ),
-                  style: ElevatedButton.styleFrom(
-                    padding: const EdgeInsets.symmetric(horizontal: 130,vertical: 15),
-                    primary: Colors.deepPurpleAccent,
-                    shape: const RoundedRectangleBorder(borderRadius: BorderRadius.all(Radius.zero)),
-                    elevation: 0,
-                    shadowColor: Colors.deepPurpleAccent,
+                    style: ElevatedButton.styleFrom(
+                      primary: Colors.black,
+                      shape: const RoundedRectangleBorder(borderRadius: BorderRadius.all(Radius.zero)),
+                      elevation: 0,
+                      shadowColor: Colors.black,
+                    ),
                   ),
                 ),
               ),

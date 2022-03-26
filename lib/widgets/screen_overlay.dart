@@ -1,45 +1,30 @@
 import 'dart:async';
-import 'package:firebase_database/firebase_database.dart';
+
 import 'package:flutter/material.dart';
+import 'package:lottie/lottie.dart';
 
 import '../Screens/home_screen.dart';
-import '../Screens/terms_and_conditions_screen.dart';
+import '../Screens/welcome_screen.dart';
 import '../global/global.dart';
 
+class LoadingScreen extends StatefulWidget {
 
-class ScreenOverlay extends StatefulWidget {
-
-
-  String? message;
-  ScreenOverlay({this.message});
 
   @override
-  State<ScreenOverlay> createState() => _ScreenOverlayState();
+  State<LoadingScreen> createState() => _LoadingScreenState();
 }
 
-class _ScreenOverlayState extends State<ScreenOverlay> {
-
-
-  startTimer(){
+class _LoadingScreenState extends State<LoadingScreen> {
+  startTimer() {
     Timer(const Duration(seconds: 3), () async {
-
-      DatabaseReference driversInfo =  FirebaseDatabase.instance.ref().child("Driver's Personal Data");
-      driversInfo.once().then((driverKey) {
-
-        final snap = driverKey.snapshot;
-        if(snap.value !=null) {
-
-          currentFirebaseUser = fbAuth.currentUser;
-
-          Navigator.push(context, MaterialPageRoute(builder: (c) =>  HomePage()));
-        } else {
-
-          Navigator.push(context, MaterialPageRoute(builder: (c) =>  TermsAndConditions()));
-
-        }
-
-      });
-
+      if (fbAuth.currentUser != null) {
+        currentFirebaseUser = fbAuth.currentUser;
+        Navigator.push(
+            context, MaterialPageRoute(builder: (c) => HomePage()));
+      } else {
+        Navigator.push(context,
+            MaterialPageRoute(builder: (c) => const WelcomePage()));
+      }
     });
   }
 
@@ -52,19 +37,20 @@ class _ScreenOverlayState extends State<ScreenOverlay> {
 
   @override
   Widget build(BuildContext context) {
-    return Material(
-      type: MaterialType.transparency,
-      child: Container(
-        color: Colors.green.shade200,
-        child: const Center(child: Text('ParcelYou',
-          style: TextStyle(
-              color: Colors.white,
-              fontWeight: FontWeight.bold,
-              fontSize: 40
-          ),
+    return Scaffold(
+      backgroundColor: Colors.white,
+      body: Center(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: <Widget>[
+            Lottie.asset("assets/loading_lottie_file.json",
+              repeat: true,
+              reverse: true,
+              animate: true,
+            ),
+          ],
+        ),
 
-        ),
-        ),
       ),
     );
   }

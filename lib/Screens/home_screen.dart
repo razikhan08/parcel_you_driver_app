@@ -1,17 +1,14 @@
 import 'dart:async';
 
 import 'package:firebase_database/firebase_database.dart';
-import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:flutter_geofire/flutter_geofire.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:parcel_you_driver_app/Screens/welcome_screen.dart';
 import 'package:parcel_you_driver_app/helpers/push_notification_service.dart';
-
 import '../global/global.dart';
 import '../widgets/drawer.dart';
 import 'method/assistant_method.dart';
@@ -80,7 +77,6 @@ class _HomePageState extends State<HomePage> with SingleTickerProviderStateMixin
     zoom: 14.4746,
   );
 
-  Position? driverCurrentPosition;
   var geoLocator = Geolocator();
 
   LocationPermission? _locationPermission;
@@ -116,8 +112,15 @@ class _HomePageState extends State<HomePage> with SingleTickerProviderStateMixin
 
     getCurrentDriverInfo() async{
     currentFirebaseUser = fbAuth.currentUser!;
+    DatabaseReference driverRef = FirebaseDatabase.instance.ref().child("Driver's Information").child(currentFirebaseUser!.uid);
+    driverRef.once().then((snapData){
+
+
+
+    });
     PushNotificationSystem pushNotificationSystem  = PushNotificationSystem();
-    pushNotificationSystem.initializeCloudMessaging();
+    pushNotificationSystem.initializeCloudMessaging(context);
+    pushNotificationSystem.generateAndGetToken();
   }
   @override
   void initState() {
@@ -211,6 +214,7 @@ class _HomePageState extends State<HomePage> with SingleTickerProviderStateMixin
                     )
                   ),
                   onPressed: (){
+
                     if (isDriverOnline != true) {
                       availableDrivers();
                       updateRealtimeDriversLocation();
@@ -224,7 +228,6 @@ class _HomePageState extends State<HomePage> with SingleTickerProviderStateMixin
                       Fluttertoast.showToast(msg: "You are online now");
 
                     } else{
-
                       offlineDrivers();
 
                       setState(() {
