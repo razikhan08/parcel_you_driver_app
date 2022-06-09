@@ -1,8 +1,9 @@
 
+
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:parcel_you_driver_app/infoHandler/app_info.dart';
-import 'package:parcel_you_driver_app/splashscreen/splash_screen.dart';
+import 'package:parcel_you_driver_app/splashScreen/splash_screen.dart';
 import 'package:provider/provider.dart';
 
 
@@ -13,23 +14,23 @@ Future<void> main() async {
   await Firebase.initializeApp();
   runApp(
      ParcelYouDriver(
-        child: ChangeNotifierProvider(
-          create: (context) => AppInfo(),
-          child: MaterialApp(
-            home: MySplashScreen(),
-            debugShowCheckedModeBanner: false,
+          child:  ChangeNotifierProvider(
+            create: (context) => AppData(),
+            child: const MaterialApp(
+              home: MySplashScreen(),
+              debugShowCheckedModeBanner: false,
 
+            ),
           ),
         ),
-    ),
-  );
+    );
 }
 
 class ParcelYouDriver extends StatefulWidget {
 
   final Widget? child;
   
-   ParcelYouDriver({this.child});
+    ParcelYouDriver({this.child});
   
   static void restartApp(BuildContext context) {
     context.findAncestorStateOfType<_ParcelYouDriverState>()!.restartApp();

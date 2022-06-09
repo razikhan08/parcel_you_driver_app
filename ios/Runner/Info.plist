@@ -5,7 +5,7 @@
 	<key>CFBundleDevelopmentRegion</key>
 	<string>$(DEVELOPMENT_LANGUAGE)</string>
 	<key>CFBundleDisplayName</key>
-	<string>Parcel You Driver App</string>
+	<string>Parceler</string>
 	<key>CFBundleExecutable</key>
 	<string>$(EXECUTABLE_NAME)</string>
 	<key>CFBundleIdentifier</key>
@@ -56,6 +56,8 @@
 	<key>UIViewControllerBasedStatusBarAppearance</key>
 	<false/>
 	<key>io.flutter.embedded_views_previews</key>
+	<true/>
+	<key>CADisableMinimumFrameDurationOnPhone</key>
 	<true/>
 </dict>
 </plist>
